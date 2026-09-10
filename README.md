@@ -1,4 +1,4 @@
-##Wa Ko Kabalo
+## Wa Ko Kabalo
 
 A student productivity and academic management system for when you don't know what to do next.
 
@@ -8,7 +8,7 @@ From assignments and deadlines to subjects and study sessions, the system helps 
 
 The project will initially focus on a frontend-only implementation using mock data. A backend powered by Node.js and a database will be integrated in a future version.
 
-#Project Goal
+# Project Goal
 
 Students often have assignments, projects, quizzes, exams, and other academic responsibilities scattered across different platforms, notebooks, and group chats.
 
@@ -22,14 +22,14 @@ Wa Ko Kabalo aims to provide a simple and centralized dashboard where students c
 🎯 Identify their most important tasks
 😭 Panic slightly less
 
-The goal is to answer one simple question:
+# The goal is to answer one simple question:
 
 "Unsa akong buhaton karon?"
 
 ✨ Features
 📊 Dashboard
 
-The dashboard provides an overview of the student's academic workload.
+# The dashboard provides an overview of the student's academic workload.
 
 Total active tasks
 Tasks due today
@@ -40,7 +40,7 @@ Upcoming deadlines
 Priority tasks
 📝 Task Management
 
-Students can manage their academic tasks through CRUD operations.
+# Students can manage their academic tasks through CRUD operations.
 
 Create new tasks
 View existing tasks
@@ -52,7 +52,7 @@ Assign tasks to subjects
 Set task priorities and deadlines
 📚 Subject Management
 
-Students can organize their academic subjects.
+# Students can organize their academic subjects.
 
 Add subjects
 View subjects
@@ -62,7 +62,7 @@ Assign tasks to subjects
 View subject-related progress
 📅 Study Planner
 
-Students can organize their study schedule through a weekly planner.
+# Students can organize their study schedule through a weekly planner.
 
 Create study sessions
 View scheduled sessions
