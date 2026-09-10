@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    if (modal) {
+        modal.hidden = true;
+    }
+
     let activeFilter = "all";
 
     function populateSubjectOptions() {
@@ -36,6 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function openTaskModal(task = null) {
+        if (modal) {
+            modal.hidden = false;
+        }
+
         populateSubjectOptions();
 
         if (!task) {
