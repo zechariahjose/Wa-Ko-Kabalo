@@ -112,8 +112,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     </td>
                     <td>${subject ? subject.name : "Unknown"}</td>
                     <td>${task.deadline || "No deadline"}</td>
-                    <td><span class="priority-badge priority-${task.priority || "medium"}">${task.priority || "medium"}</span></td>
-                    <td><span class="status-badge ${statusClass}">${task.status || "not-started"}</span></td>
+                    <td>
+                        <select class="table-select" data-field="priority" data-id="${task.id}">
+                            <option value="high" ${task.priority === "high" ? "selected" : ""}>High</option>
+                            <option value="medium" ${task.priority === "medium" || !task.priority ? "selected" : ""}>Medium</option>
+                            <option value="low" ${task.priority === "low" ? "selected" : ""}>Low</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="table-select" data-field="status" data-id="${task.id}">
+                            <option value="not-started" ${task.status === "not-started" ? "selected" : ""}>Not started</option>
+                            <option value="in-progress" ${task.status === "in-progress" ? "selected" : ""}>In progress</option>
+                            <option value="completed" ${task.status === "completed" ? "selected" : ""}>Completed</option>
+                        </select>
+                    </td>
                     <td>
                         ${task.progress || 0}%
                         <div class="progress-line"><span style="width: ${task.progress || 0}%"></span></div>
@@ -226,6 +238,27 @@ document.addEventListener("DOMContentLoaded", () => {
         if (action === "delete") {
             deleteTask(taskId);
         }
+    });
+
+    taskTableBody.addEventListener("change", (event) => {
+        const field = event.target.closest("select[data-field]");
+
+        if (!field) {
+            return;
+        }
+
+        const taskId = field.dataset.id;
+        const tasks = getTasks();
+        const taskIndex = tasks.findIndex(task => String(task.id) === String(taskId));
+
+        if (taskIndex === -1) {
+            return;
+        }
+
+        const updatedTask = { ...tasks[taskIndex], [field.dataset.field]: field.value };
+        tasks[taskIndex] = updatedTask;
+        saveTasks(tasks);
+        renderTasks();
     });
 
     taskSearchInput?.addEventListener("input", renderTasks);

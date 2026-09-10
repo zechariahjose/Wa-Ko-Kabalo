@@ -19,16 +19,25 @@ function loadFromStorage(key, fallback) {
     }
 }
 
+function notifyDataUpdated() {
+    if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("wkk:data-updated"));
+    }
+}
+
 function saveSubjects(subjects) {
     localStorage.setItem(STORAGE_KEYS.subjects, JSON.stringify(subjects));
+    notifyDataUpdated();
 }
 
 function saveTasks(tasks) {
     localStorage.setItem(STORAGE_KEYS.tasks, JSON.stringify(tasks));
+    notifyDataUpdated();
 }
 
 function saveStudySessions(studySessions) {
     localStorage.setItem(STORAGE_KEYS.studySessions, JSON.stringify(studySessions));
+    notifyDataUpdated();
 }
 
 function getSubjects() {
