@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wa Ko Kabalo - Tasks</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">W</div>
+                <div>
+                    <p class="brand-name">Wa Ko Kabalo</p>
+                    <span class="brand-tag">Student planner</span>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link active" href="tasks.html">Tasks</a>
+                <a class="nav-link" href="subjects.html">Subjects</a>
+                <a class="nav-link" href="planner.html">Planner</a>
+            </nav>
+        </aside>
+
+        <main class="page-content">
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Task list</p>
+                    <h1>Tasks</h1>
+                </div>
+                <button class="primary-btn" type="button">New task</button>
+            </header>
+
+            <section class="panel page-toolbar" aria-label="Task filters">
+                <div class="filter-group">
+                    <button class="chip active" type="button">All</button>
+                    <button class="chip" type="button">Pending</button>
+                    <button class="chip" type="button">In progress</button>
+                    <button class="chip" type="button">Completed</button>
+                </div>
+
+                <div class="search-box">
+                    <input type="search" placeholder="Search task title">
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Academic tasks</h2>
+                    <span class="label">Overview</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Subject</th>
+                                <th>Deadline</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/tasks.js"></script>
+</body>
+</html>

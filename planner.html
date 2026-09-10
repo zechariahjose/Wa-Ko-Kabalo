@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wa Ko Kabalo - Planner</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">W</div>
+                <div>
+                    <p class="brand-name">Wa Ko Kabalo</p>
+                    <span class="brand-tag">Student planner</span>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="tasks.html">Tasks</a>
+                <a class="nav-link" href="subjects.html">Subjects</a>
+                <a class="nav-link active" href="planner.html">Planner</a>
+            </nav>
+        </aside>
+
+        <main class="page-content">
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Schedule</p>
+                    <h1>Study planner</h1>
+                </div>
+                <button class="primary-btn" type="button">New session</button>
+            </header>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Weekly plan</h2>
+                    <span class="label">Upcoming</span>
+                </div>
+                <div id="plannerWeek" class="week-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/planner.js"></script>
+</body>
+</html>
