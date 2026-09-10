@@ -281,4 +281,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     populateSubjectOptions();
     renderTasks();
+
+    if (new URLSearchParams(window.location.search).has("new")) {
+        openTaskModal();
+    }
 });
