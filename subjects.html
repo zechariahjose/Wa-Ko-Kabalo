@@ -26,21 +26,35 @@
             </nav>
         </aside>
 
-        <main class="page-content">
-            <header class="page-header">
-                <div>
-                    <p class="eyebrow">Academic list</p>
-                    <h1>Subjects</h1>
-                </div>
-                <button id="newSubjectButton" class="primary-btn" type="button">Add subject</button>
+        <main class="page-content subjects-page">
+            <header class="topbar">
+                <div class="search-bar"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search assignments, notes, codes... (Cmd + K)"></div>
+                <div class="topbar-actions"><span class="focus-pill"><span></span> Focus sprint active</span><span class="notification-dot">3</span><span class="avatar">M</span></div>
             </header>
 
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>Subject overview</h2>
-                    <span class="label">Semester</span>
+            <header class="page-header subjects-heading">
+                <div>
+                    <div class="title-line"><h1>Enrolled Subjects</h1><span class="term-pill">Current term</span></div>
+                    <p>Manage your current courses, grade projections, and modular syllabus checklists.</p>
                 </div>
+                <div class="heading-actions"><button class="secondary-btn" type="button">▦ Timetable View</button><button id="newSubjectButton" class="primary-btn" type="button">＋ Add New Subject</button></div>
+            </header>
+
+            <section class="subject-stats" aria-label="Subject summary">
+                <div class="subject-stat"><span>Total workload</span><strong id="subjectTotal">0</strong><small><b id="subjectTaskTotal">0</b> academic items</small><em>Full load</em></div>
+                <div class="subject-stat"><span>Projected GWA</span><strong>--</strong><small>Grade projection unavailable</small><em class="stat-coral">Current data</em></div>
+                <div class="subject-stat"><span>Syllabus progress</span><strong id="subjectProgress">0%</strong><small>Across enrolled subjects</small><i><b id="subjectProgressBar"></b></i></div>
+                <div class="subject-stat"><span>Pending coursework</span><strong id="subjectPending">0</strong><small>Across active subjects</small><em class="stat-coral">Needs attention</em></div>
+            </section>
+
+            <section class="active-courses-section">
+                <div class="section-heading"><div><h2>Active Courses <small id="activeSubjectCount">0</small></h2></div><div class="section-view">▦　☷</div></div>
                 <div id="subjectsGrid" class="subject-grid"></div>
+            </section>
+
+            <section class="documents-section">
+                <div class="section-heading"><div><h2>Semester Documents &amp; Syllabi Quick Vault</h2><p>Keep links and course references together for quick access.</p></div><a href="subjects.html">View subject details ↗</a></div>
+                <div class="document-grid"><article><span class="document-icon">▤</span><strong>Approved Course Syllabi</strong><small>Course reference space</small><p>No documents connected yet.</p></article><article><span class="document-icon coral">≡</span><strong>Grading Breakdown Matrix</strong><small>Assessment reference space</small><p>Use subject details to track progress.</p></article><article><span class="document-icon mint">▣</span><strong>Faculty Consultation Hours</strong><small>Instructor reference space</small><p>Instructor information stays with each subject.</p></article></div>
             </section>
         </main>
     </div>

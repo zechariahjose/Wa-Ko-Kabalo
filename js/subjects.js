@@ -14,6 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderSubjects() {
         const subjects = getSubjects();
+        const tasks = getTasks();
+        const completedTasks = tasks.filter(task => task.status === "completed").length;
+        const subjectTotal = document.getElementById("subjectTotal");
+        const subjectTaskTotal = document.getElementById("subjectTaskTotal");
+        const subjectProgress = document.getElementById("subjectProgress");
+        const subjectProgressBar = document.getElementById("subjectProgressBar");
+        const subjectPending = document.getElementById("subjectPending");
+        const activeSubjectCount = document.getElementById("activeSubjectCount");
+
+        if (subjectTotal) subjectTotal.textContent = subjects.length;
+        if (subjectTaskTotal) subjectTaskTotal.textContent = tasks.length;
+        const overallProgress = tasks.length ? Math.round((completedTasks / tasks.length) * 100) : 0;
+        if (subjectProgress) subjectProgress.textContent = `${overallProgress}%`;
+        if (subjectProgressBar) subjectProgressBar.style.width = `${overallProgress}%`;
+        if (subjectPending) subjectPending.textContent = tasks.filter(task => task.status !== "completed").length;
+        if (activeSubjectCount) activeSubjectCount.textContent = subjects.length;
 
         if (!subjects.length) {
             subjectsGrid.innerHTML = '<div class="empty-state">No subjects yet.</div>';
@@ -26,22 +42,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const progress = relatedTasks.length ? Math.round((completedCount / relatedTasks.length) * 100) : 0;
 
             return `
-                <article class="subject-card">
-                    <div class="subject-card-header">
-                        <h3>${subject.name}</h3>
+                <article class="subject-card course-card">
+                    <div class="course-card-top">
                         <span class="subject-code">${subject.code}</span>
+                        <span class="course-status">${relatedTasks.length ? `${relatedTasks.length} active` : "No tasks"}</span>
                     </div>
-                    <p>${subject.instructor}</p>
-                    <div class="subject-meta">
-                        <span>${relatedTasks.length} tasks</span>
-                        <span>${completedCount} completed</span>
-                    </div>
+                    <h3>${subject.name}</h3>
+                    <p class="course-instructor">♙ ${subject.instructor}</p>
+                    <div class="course-time">◷ Course workload · ${relatedTasks.length} linked task${relatedTasks.length === 1 ? "" : "s"}</div>
+                    <div class="course-progress-label"><span>Syllabus coverage</span><b>${progress}% Complete</b></div>
                     <div class="progress-line">
                         <span style="width: ${progress}%"></span>
                     </div>
-                    <div class="form-actions" style="margin-top: 16px; justify-content: flex-end;">
+                    <div class="course-stat-row"><span><small>Assignments</small><strong>${relatedTasks.length} ${relatedTasks.length === 1 ? "item" : "items"}</strong></span><span><small>Completed</small><strong>${completedCount}</strong></span></div>
+                    <div class="form-actions course-actions" style="margin-top: 16px; justify-content: flex-end;">
                         <div class="form-actions-right">
-                            <button class="secondary-btn small-btn" type="button" data-action="edit" data-id="${subject.id}">Edit</button>
+                            <button class="secondary-btn small-btn course-notes" type="button" data-action="edit" data-id="${subject.id}">▧ Syllabus &amp; Notes</button>
                             <button class="danger-btn small-btn" type="button" data-action="delete" data-id="${subject.id}">Delete</button>
                         </div>
                     </div>
