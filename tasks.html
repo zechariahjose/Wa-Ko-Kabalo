@@ -26,50 +26,62 @@
             </nav>
         </aside>
 
-        <main class="page-content">
-            <header class="page-header">
-                <div>
-                    <p class="eyebrow">Task list</p>
-                    <h1>Tasks</h1>
-                </div>
-                <button id="newTaskButton" class="primary-btn" type="button">New task</button>
+        <main class="page-content tasks-page">
+            <header class="topbar">
+                <div class="search-bar"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search assignments, notes, codes... (Cmd + K)"></div>
+                <div class="topbar-actions"><span class="focus-pill"><span></span> Focus sprint active</span><span class="notification-dot">3</span><span class="avatar">M</span></div>
             </header>
 
-            <section class="panel page-toolbar" aria-label="Task filters">
+            <header class="page-header tasks-heading">
+                <div>
+                    <div class="title-line"><h1>Academic Tasks</h1><span class="term-pill">Current term</span></div>
+                    <p>Organize, prioritize, and conquer deadlines without the panic.</p>
+                </div>
+                <div class="heading-actions"><button class="secondary-btn" type="button">☷ Filter Views</button><button id="newTaskButton" class="primary-btn" type="button">⊕ New Task</button></div>
+            </header>
+
+            <section class="momentum-strip"><div class="momentum-icon">ϟ</div><div><strong>Momentum: One step at a time</strong><small>You have <b id="momentumActive">0</b> active assignments remaining across your courses.</small></div><div class="rhythm-meter"><span>Daily Rhythm Pace <b>66% Completed</b></span><i><em></em></i><small><b>●</b> Done <span>●</span> Active <small>●</small> Remaining</small></div></section>
+
+            <section class="panel page-toolbar task-filter-toolbar" aria-label="Task filters">
                 <div class="filter-group">
-                    <button class="chip active" type="button" data-filter="all">All</button>
-                    <button class="chip" type="button" data-filter="not-started">Pending</button>
-                    <button class="chip" type="button" data-filter="in-progress">In progress</button>
-                    <button class="chip" type="button" data-filter="completed">Completed</button>
+                    <button class="chip active" type="button" data-filter="all">All Tasks <small id="allTaskCount">0</small></button>
+                    <button class="chip" type="button" data-filter="due-today">Due Today <small id="dueTodayCount">0</small></button>
+                    <button class="chip" type="button" data-filter="high">High Priority <small id="highPriorityCount">0</small></button>
+                    <button class="chip" type="button" data-filter="overdue">● Overdue <small id="overdueCount">0</small></button>
+                    <button class="chip" type="button" data-filter="completed">Completed <small id="completedCount">0</small></button>
                 </div>
-
-                <div class="search-box">
-                    <input id="taskSearchInput" type="search" placeholder="Search task title">
-                </div>
+                <div class="view-switch"><button class="view-active" type="button">▦ List</button><button type="button">▦ Kanban</button><button type="button">▤ Timeline</button></div>
             </section>
 
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>Academic tasks</h2>
-                    <span class="label">Overview</span>
-                </div>
-
-                <div class="table-wrap">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Task</th>
-                                <th>Subject</th>
-                                <th>Deadline</th>
-                                <th>Priority</th>
-                                <th>Status</th>
-                                <th>Progress</th>
-                            </tr>
-                        </thead>
-                        <tbody id="taskTableBody"></tbody>
-                    </table>
-                </div>
+            <section class="task-search-row">
+                <div class="search-box"><span>⌕</span><input id="taskSearchInput" type="search" placeholder="Search assignments, quizzes, problem sets, projects..."></div>
+                <div class="subject-filter-pills"><small>SUBJECTS:</small><span>● CS 312</span><span>● MATH 101</span><span>● PHYS 21</span><span>● HUMA 1</span></div>
             </section>
+
+            <div class="tasks-workspace">
+                <section class="panel task-list-panel">
+                    <div class="task-section-heading"><h2>Overdue <small>1 action needed</small></h2><span>Don't freeze, just ship a draft</span></div>
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Task</th><th>Subject</th><th>Deadline</th><th>Priority</th><th>Status</th><th>Progress</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="taskTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <aside class="panel task-inspector" aria-label="Task inspector preview">
+                    <div class="panel-header"><h2>ⓘ Task Inspector</h2><span class="inspector-status">In Progress⌄</span></div>
+                    <span class="inspector-code">CS 312 · Operating Systems</span><h3>Your selected task</h3><span class="priority-high inspector-priority">High Priority</span>
+                    <p class="inspector-label">DESCRIPTION</p><p class="inspector-copy">Select a task from the list to review its details. This preview keeps the reference layout ready for richer task inspection later.</p>
+                    <p class="inspector-label">SUBTASKS BREAKDOWN</p><div class="inspector-steps"><span>☑ First planning step</span><span>☑ Work through the details</span><span>□ Draft a conclusion</span><span>□ Mark the task complete</span></div>
+                    <button class="primary-btn inspector-action" type="button">◉ Start Focus Sprint</button>
+                    <button class="secondary-btn inspector-done" type="button">✓ Mark as Done</button>
+                </aside>
+            </div>
         </main>
     </div>
 

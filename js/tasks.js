@@ -81,7 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
         let tasks = getTasks();
         const searchTerm = (taskSearchInput ? taskSearchInput.value.trim().toLowerCase() : "");
 
-        if (activeFilter !== "all") {
+        const today = new Date().toISOString().split("T")[0];
+
+        if (activeFilter === "high") {
+            tasks = tasks.filter(task => task.priority === "high");
+        } else if (activeFilter === "overdue") {
+            tasks = tasks.filter(task => task.deadline && task.deadline < today && task.status !== "completed");
+        } else if (activeFilter === "due-today") {
+            tasks = tasks.filter(task => task.deadline === today && task.status !== "completed");
+        } else if (activeFilter !== "all") {
             tasks = tasks.filter(task => task.status === activeFilter);
         }
 
@@ -98,6 +106,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderTasks() {
         const tasks = getFilteredTasks();
+        const allTasks = getTasks();
+        const today = new Date().toISOString().split("T")[0];
+        const activeTasks = allTasks.filter(task => task.status !== "completed");
+        const momentumActive = document.getElementById("momentumActive");
+        const allTaskCount = document.getElementById("allTaskCount");
+        const dueTodayCount = document.getElementById("dueTodayCount");
+        const highPriorityCount = document.getElementById("highPriorityCount");
+        const overdueCount = document.getElementById("overdueCount");
+        const completedCount = document.getElementById("completedCount");
+
+        if (momentumActive) momentumActive.textContent = activeTasks.length;
+        if (allTaskCount) allTaskCount.textContent = allTasks.length;
+        if (dueTodayCount) dueTodayCount.textContent = allTasks.filter(task => task.deadline === today && task.status !== "completed").length;
+        if (highPriorityCount) highPriorityCount.textContent = allTasks.filter(task => task.priority === "high" && task.status !== "completed").length;
+        if (overdueCount) overdueCount.textContent = allTasks.filter(task => task.deadline && task.deadline < today && task.status !== "completed").length;
+        if (completedCount) completedCount.textContent = allTasks.filter(task => task.status === "completed").length;
 
         if (!tasks.length) {
             taskTableBody.innerHTML = `
