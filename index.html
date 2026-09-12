@@ -16,6 +16,7 @@
                     <span class="brand-tag">Student planner</span>
                 </div>
             </div>
+            <a class="sidebar-quick-add" href="tasks.html?new=1">＋ Quick Add</a>
 
             <nav class="main-nav" aria-label="Main navigation">
                 <a class="nav-link active" href="index.html">Dashboard</a>
@@ -31,54 +32,48 @@
             </div>
         </aside>
 
-        <main class="page-content">
-            <header class="page-header">
-                <div>
-                    <p class="eyebrow">Overview</p>
-                    <h1>Dashboard</h1>
-                </div>
-                <a class="primary-btn" href="tasks.html?new=1">Add task</a>
+        <main class="page-content dashboard-page">
+            <header class="topbar">
+                <div class="search-bar"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search assignments, notes, codes... (Cmd + K)"></div>
+                <div class="topbar-actions"><span class="focus-pill"><span></span> Focus sprint active</span><span class="notification-dot">3</span><span class="avatar">M</span></div>
             </header>
 
-            <section class="stats-grid" aria-label="Academic statistics">
-                <div class="stat-card stat-card-accent">
-                    <p>Active tasks</p>
-                    <strong id="activeTasks">0</strong>
+            <section class="welcome-band">
+                <div>
+                    <p class="eyebrow">Midterms sprint</p>
+                    <h1>Huna-hunaa: <em>Usa-usa lang.</em></h1>
+                    <p>Take a slow breath. Mind your work best when it tackles one single thread at a time.</p>
                 </div>
-                <div class="stat-card">
-                    <p>Due today</p>
-                    <strong id="dueToday">0</strong>
-                </div>
-                <div class="stat-card">
-                    <p>Overdue</p>
-                    <strong id="overdueTasks">0</strong>
-                </div>
-                <div class="stat-card">
-                    <p>Completed</p>
-                    <strong id="completedTasks">0</strong>
-                </div>
-                <div class="stat-card">
-                    <p>Completion rate</p>
-                    <strong id="completionRate">0%</strong>
-                </div>
+                <div class="encouragement"><span>↗</span><div><strong>Pahuwy Ginhawa</strong><small>Take it one calmly</small></div><b>5s</b></div>
             </section>
 
-            <div class="dashboard-grid">
-                <section class="panel">
-                    <div class="panel-header">
-                        <h2>Priority tasks</h2>
-                        <a href="tasks.html">View all</a>
-                    </div>
-                    <div id="priorityTasks" class="task-list"></div>
-                </section>
+            <section class="calm-strip"><span class="calm-icon">◔</span><div><strong>Panic Meter: Chill &amp; Handled</strong><small>Relax lang, kaya ra ni! Keep one urgent item in view at a time.</small></div><span class="calm-progress"><i></i></span><small>Calm mode</small></section>
 
-                <section class="panel">
-                    <div class="panel-header">
-                        <h2>Upcoming deadlines</h2>
-                        <a href="planner.html">Planner</a>
-                    </div>
-                    <div id="upcomingTasks" class="mini-list"></div>
-                </section>
+            <div class="dashboard-grid dashboard-grid-reference">
+                <div class="dashboard-main">
+                    <section class="focus-card">
+                        <div class="focus-card-copy"><div class="focus-tags"><span>● UNSA AKONG BUHATON KARON?</span><span>Current priority</span></div><p class="focus-due">◷ Choose a task from your priority list</p><h2>One task at a time</h2><p>Use this space as your visual focus point. The connected task list below remains powered by your existing planner data.</p></div>
+                        <div class="micro-progress"><strong>MICRO-PROGRESS <small>Visual placeholder</small></strong><div><span>□ First step</span><span>□ Working notes</span><span>□ Final review</span><span>□ Mark complete</span></div></div>
+                        <div class="focus-actions"><a class="primary-btn" href="planner.html">◉ Start Focus Session</a><a class="secondary-btn" href="tasks.html">Break Down Steps</a><a href="tasks.html">Skip for now ›</a></div>
+                    </section>
+
+                    <section class="stats-grid" aria-label="Academic statistics">
+                        <div class="stat-card stat-card-accent"><p>Active tasks</p><strong id="activeTasks">0</strong><small>in your daily loop</small></div>
+                        <div class="stat-card"><p>Due today</p><strong id="dueToday">0</strong><small>must finish before 11:59p</small></div>
+                        <div class="stat-card"><p>Overdue</p><strong id="overdueTasks">0</strong><small>needs grace &amp; quick win</small></div>
+                        <div class="stat-card"><p>Completed</p><strong id="completedTasks">0</strong><small>this week</small></div>
+                        <div class="stat-card stat-card-rate"><p>Completion rate</p><strong id="completionRate">0%</strong><small>overall progress</small></div>
+                    </section>
+
+                    <section class="panel matrix-panel"><div class="panel-header"><div><h2>Eisenhower Clarity Matrix</h2><p class="panel-subtitle">Map mental chaos into 4 grounded decision zones.</p></div><span class="filter-tag">Active Filter · By Class</span></div><div id="priorityTasks" class="task-list matrix-list"></div></section>
+                </div>
+
+                <aside class="dashboard-rail">
+                    <section class="panel timer-card"><div class="panel-header"><span class="focus-label">Focus block</span><small>Visual preview</small></div><p>Currently focusing</p><h2>Your next study session</h2><div class="timer-ring"><strong>--:--</strong><small>not started</small></div><div class="timer-actions"><button class="primary-btn" type="button">Ⅱ Pause</button><button class="secondary-btn" type="button">↻</button><button class="primary-btn mint-btn" type="button">▣ 5m<br> Pahuway</button></div></section>
+                    <section class="panel deadlines-card"><div class="panel-header"><h2>Upcoming Deadlines</h2><a href="planner.html">Chronological</a></div><div id="upcomingTasks" class="mini-list"></div></section>
+                    <section class="quote-card"><strong>☕ Pahuwaw Kadiyot</strong><p>“Dimagganat langay — your work is not defined by your backlog. Take a sip of water and stretch.”</p></section>
+                    <section class="panel rhythm-card"><div class="panel-header"><h2>Weekly Rhythm</h2><strong>Plan your pace</strong></div><div class="week-dots"><span>M</span><span>T</span><span class="today">W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></section>
+                </aside>
             </div>
         </main>
     </div>
