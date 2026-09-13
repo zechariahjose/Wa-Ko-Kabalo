@@ -7,20 +7,71 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelSessionModal = document.getElementById("cancelSessionModal");
     const sessionModalTitle = document.getElementById("sessionModalTitle");
     const deleteSessionButton = document.getElementById("deleteSessionButton");
+    const plannerDays = document.getElementById("plannerDays");
+    const plannerDateRange = document.getElementById("plannerDateRange");
+    const plannerFlowTitle = document.getElementById("plannerFlowTitle");
+    const plannerFlowSummary = document.getElementById("plannerFlowSummary");
 
     if (!plannerWeek || !sessionForm) {
         return;
     }
 
-    const days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-    ];
+    let selectedDate = new Date();
+    selectedDate.setHours(0, 0, 0, 0);
+    let weekOffset = 0;
+
+    function formatDateKey(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    function getWeekDates() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const monday = new Date(today);
+        const day = monday.getDay();
+        monday.setDate(monday.getDate() - (day === 0 ? 6 : day - 1) + weekOffset * 7);
+        return Array.from({ length: 7 }, (_, index) => {
+            const date = new Date(monday);
+            date.setDate(monday.getDate() + index);
+            return date;
+        });
+    }
+
+    function isTaskDone(item) {
+        return item.status === "completed" || item.completed === true;
+    }
+
+    function getDayItems(date) {
+        const dateKey = formatDateKey(date);
+        const tasks = getTasks().filter(task => task.deadline === dateKey).map(task => ({ ...task, itemType: "task" }));
+        const sessions = getStudySessions().filter(session => session.date === dateKey).map(session => ({ ...session, itemType: "session" }));
+        return [...tasks, ...sessions].sort((a, b) => (a.startTime || "99:99").localeCompare(b.startTime || "99:99"));
+    }
+
+    function getDotClass(item) {
+        if (item.itemType === "session") return "dot-blue";
+        return `dot-${item.priority || "medium"}`;
+    }
+
+    function renderDateStrip(weekDates) {
+        if (!plannerDays) return;
+        const todayKey = formatDateKey(new Date());
+        plannerDays.innerHTML = weekDates.map(date => {
+            const dateKey = formatDateKey(date);
+            const dayItems = getDayItems(date);
+            const dotTypes = [...new Set(dayItems.map(getDotClass))];
+            const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
+            return `<button class="planner-day ${dateKey === formatDateKey(selectedDate) ? "active" : ""}" type="button" data-date="${dateKey}" aria-pressed="${dateKey === formatDateKey(selectedDate)}">
+                <span>${dayName}${dateKey === todayKey ? " <b>Today</b>" : ""}</span><strong>${date.getDate()}</strong><small class="planner-dots">${dotTypes.map(type => `<i class="${type}"></i>`).join("")}</small>
+            </button>`;
+        }).join("");
+        if (plannerDateRange) {
+            plannerDateRange.textContent = `${weekDates[0].toLocaleDateString("en-US", { month: "short", day: "numeric" })} - ${weekDates[6].toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
+        }
+    }
 
     function populateSubjectOptions() {
         const subjectSelect = document.getElementById("sessionSubject");
@@ -42,47 +93,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderPlanner() {
+        const weekDates = getWeekDates();
+        if (!weekDates.some(date => formatDateKey(date) === formatDateKey(selectedDate))) {
+            selectedDate = weekDates[0];
+        }
+        renderDateStrip(weekDates);
         const sessions = getStudySessions().sort((a, b) => {
             const aDate = new Date(`${a.date}T${a.startTime || "00:00"}:00`);
             const bDate = new Date(`${b.date}T${b.startTime || "00:00"}:00`);
             return aDate - bDate;
         });
 
-        plannerWeek.innerHTML = days.map(day => {
-            const daySessions = sessions.filter(session => {
-                if (!session.date) {
-                    return false;
-                }
-                const sessionDate = new Date(session.date + "T00:00:00");
-                return sessionDate.toLocaleDateString("en-US", { weekday: "long" }) === day;
-            });
-
-            return `
+        const selectedItems = getDayItems(selectedDate);
+        const selectedDay = selectedDate.toLocaleDateString("en-US", { weekday: "long" });
+        plannerWeek.innerHTML = `
                 <div class="planner-day-column">
-                    <div class="planner-day-heading"><h3>${day}</h3><span>${daySessions.length} block${daySessions.length === 1 ? "" : "s"}</span></div>
+                    <div class="planner-day-heading"><h3>${selectedDay}, ${selectedDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</h3><span>${selectedItems.length} item${selectedItems.length === 1 ? "" : "s"}</span></div>
                     <div class="session-list">
-                        ${daySessions.length ? daySessions.map(session => {
-                            const subject = getSubjectById(session.subjectId);
+                        ${selectedItems.length ? selectedItems.map(item => {
+                            const subject = getSubjectById(item.subjectId);
+                            const done = isTaskDone(item);
+                            const itemTime = item.itemType === "task" ? `Due ${item.deadline}` : `${item.startTime} · ${item.duration} min`;
                             return `
-                                <div class="session-item planner-session-item">
-                                    <div class="planner-session-time">${session.startTime} · ${session.duration} min</div>
-                                    <h4>${session.topic}</h4>
+                                <div class="session-item planner-session-item ${done ? "is-complete" : ""}">
+                                    <button class="completion-toggle ${done ? "is-complete" : ""}" type="button" data-action="toggle-complete" data-type="${item.itemType}" data-id="${item.id}" aria-label="${done ? "Mark incomplete" : "Mark complete"}">${done ? "✓" : ""}</button>
+                                    <div class="planner-session-time">${itemTime}</div>
+                                    <h4>${item.itemType === "task" ? item.title : item.topic}</h4>
                                     <div class="session-meta">
                                         <span>${subject ? subject.name : "Unknown"}</span>
                                     </div>
                                     <div class="form-actions planner-session-actions">
                                         <div class="form-actions-right">
-                                            <button class="secondary-btn small-btn" type="button" data-action="edit" data-id="${session.id}">Edit</button>
-                                            <button class="danger-btn small-btn" type="button" data-action="delete" data-id="${session.id}">Delete</button>
+                                            ${item.itemType === "session" ? `<button class="secondary-btn small-btn" type="button" data-action="edit" data-id="${item.id}">Edit</button><button class="danger-btn small-btn" type="button" data-action="delete" data-id="${item.id}">Delete</button>` : ""}
                                         </div>
                                     </div>
                                 </div>
                             `;
-                        }).join("") : '<p class="empty-state">No study sessions.</p>'}
+                        }).join("") : '<p class="empty-state">No tasks or study blocks planned for this day.</p>'}
                     </div>
                 </div>
             `;
-        }).join("");
+        if (plannerFlowTitle) plannerFlowTitle.firstChild.textContent = `${selectedDay}'s Focus Flow `;
+        if (plannerFlowSummary) plannerFlowSummary.textContent = `${selectedItems.length} item${selectedItems.length === 1 ? "" : "s"}`;
+    }
+
+    function toggleComplete(type, id) {
+        if (type === "task") {
+            const tasks = getTasks();
+            const task = tasks.find(item => String(item.id) === String(id));
+            if (task) {
+                task.status = isTaskDone(task) ? "in-progress" : "completed";
+                task.completed = task.status === "completed";
+                saveTasks(tasks);
+            }
+        } else {
+            const sessions = getStudySessions();
+            const session = sessions.find(item => String(item.id) === String(id));
+            if (session) {
+                session.completed = !isTaskDone(session);
+                saveStudySessions(sessions);
+            }
+        }
+        renderPlanner();
     }
 
     function openSessionModal(session = null) {
@@ -194,6 +266,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const sessionId = button.dataset.id;
         const action = button.dataset.action;
 
+        if (action === "toggle-complete") {
+            toggleComplete(button.dataset.type, sessionId);
+            return;
+        }
+
         if (action === "edit") {
             const session = getStudySessions().find(item => String(item.id) === String(sessionId));
             if (session) {
@@ -204,6 +281,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (action === "delete") {
             deleteSession(sessionId);
         }
+    });
+
+    plannerDays?.addEventListener("click", (event) => {
+        const dayButton = event.target.closest("button[data-date]");
+        if (!dayButton) return;
+        selectedDate = new Date(`${dayButton.dataset.date}T00:00:00`);
+        renderPlanner();
+    });
+
+    document.querySelector(".planner-date-control button:first-child")?.addEventListener("click", () => {
+        weekOffset -= 1;
+        renderPlanner();
+    });
+
+    document.querySelector(".planner-date-control button:last-child")?.addEventListener("click", () => {
+        weekOffset += 1;
+        renderPlanner();
     });
 
     populateSubjectOptions();

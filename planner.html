@@ -40,12 +40,12 @@
                 </div>
                 <div class="planner-controls">
                     <div class="planner-view-tabs"><button class="active" type="button">Weekly</button><button type="button">Daily flow</button><button type="button">Month</button></div>
-                    <div class="planner-date-control"><button type="button" aria-label="Previous week">‹</button><span>Sep 9 - 15, 2026</span><button type="button" aria-label="Next week">›</button></div>
+                    <div class="planner-date-control"><button type="button" aria-label="Previous week">‹</button><span id="plannerDateRange">This week</span><button type="button" aria-label="Next week">›</button></div>
                     <div class="planner-actions"><button class="secondary-btn" type="button">Today</button><button id="newSessionButton" class="primary-btn" type="button">⊕ Add Block</button></div>
                 </div>
             </section>
 
-            <section class="planner-tip"><span class="planner-tip-icon">▣</span><div><strong>PAHUWAY TIP · Gentle Pacing</strong><p><em>Dimagganat tanan.</em> Take it one 25-minute Pomodoro at a time. Maya, you're doing just fine.</p></div><span class="planner-tip-tag">Sem 1 · Week 7</span></section>
+            <section class="planner-tip"><span class="planner-tip-icon">▣</span><div><strong>PAHUWAY TIP · Gentle Pacing</strong><p><em>Di maganap tanan.</em> Take it one 25-minute Pomodoro at a time. Maya, you're doing just fine.</p></div><span class="planner-tip-tag">Sem 1 · Week 7</span></section>
 
             <div class="planner-layout">
                 <div class="planner-main">
@@ -55,9 +55,9 @@
                         <article class="planner-stat planner-stat-focus"><div><span>Instant sprint</span><strong>One-Touch Focus</strong><small>Start a 25-minute Pomodoro without setup fatigue.</small></div><b class="stat-icon blue">ϟ</b><button class="primary-btn" type="button">▷ Quick 25m Focus Sprint</button></article>
                     </section>
 
-                    <section class="planner-days" aria-label="Week at a glance"><div class="planner-day"><span>Mon</span><strong>14</strong><small>•</small></div><div class="planner-day active"><span>Tue <b>Today</b></span><strong>15</strong><small>•</small></div><div class="planner-day"><span>Wed</span><strong>16</strong><small>•</small></div><div class="planner-day"><span>Thu</span><strong>17</strong><small>•</small></div><div class="planner-day"><span>Fri</span><strong>18</strong><small>•</small></div><div class="planner-day"><span>Sat</span><strong>19</strong><small>•</small></div><div class="planner-day"><span>Sun</span><strong>20</strong><small>•</small></div></section>
+                    <section id="plannerDays" class="planner-days" aria-label="Week at a glance"></section>
 
-                    <section class="planner-flow panel"><div class="panel-header"><div><h2>Today's Focus Flow <small>4 Blocks · 4.5 hrs planned</small></h2></div><a href="subjects.html">☷ Filter Subjects</a></div><div id="plannerWeek" class="planner-week-grid"></div></section>
+                    <section class="planner-flow panel"><div class="panel-header"><div><h2 id="plannerFlowTitle">Today's Focus Flow <small id="plannerFlowSummary"></small></h2></div><a href="subjects.html">☷ Filter Subjects</a></div><div id="plannerWeek" class="planner-week-grid"></div></section>
                 </div>
 
                 <aside class="planner-rail">
