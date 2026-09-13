@@ -11,10 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const plannerDateRange = document.getElementById("plannerDateRange");
     const plannerFlowTitle = document.getElementById("plannerFlowTitle");
     const plannerFlowSummary = document.getElementById("plannerFlowSummary");
+    const plannerViewTabs = document.querySelectorAll(".planner-view-tabs button");
 
     if (!plannerWeek || !sessionForm) {
         return;
     }
+
+    plannerViewTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            plannerViewTabs.forEach(item => item.classList.remove("active"));
+            tab.classList.add("active");
+        });
+    });
 
     let selectedDate = new Date();
     selectedDate.setHours(0, 0, 0, 0);

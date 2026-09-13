@@ -272,7 +272,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .planner-view-tabs, .planner-date-control, .planner-actions { display: flex; align-items: center; gap: 5px; }
 .planner-view-tabs button, .planner-date-control, .planner-date-control button { border: 1px solid var(--border); background: #fff; color: var(--muted); font-size: 0.62rem; }
 .planner-view-tabs button { padding: 6px 9px; border-radius: 7px; }
-.planner-view-tabs button.active { color: var(--primary); background: var(--primary-soft); border-color: transparent; font-weight: 800; }
+.planner-view-tabs button.active { color: var(--primary); background: #DEE1FF; border-color: transparent; font-weight: 800; }
 .planner-date-control { padding: 4px 6px; border-radius: 8px; color: var(--text); }
 .planner-date-control button { width: 22px; height: 22px; padding: 0; border: 0; border-radius: 5px; font-size: 1rem; line-height: 1; }
 .planner-actions .primary-btn, .planner-actions .secondary-btn { padding: 7px 11px; font-size: 0.65rem; }
