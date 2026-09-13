@@ -58,20 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             return `
-                <div class="day-card">
-                    <h3>${day}</h3>
+                <div class="planner-day-column">
+                    <div class="planner-day-heading"><h3>${day}</h3><span>${daySessions.length} block${daySessions.length === 1 ? "" : "s"}</span></div>
                     <div class="session-list">
                         ${daySessions.length ? daySessions.map(session => {
                             const subject = getSubjectById(session.subjectId);
                             return `
-                                <div class="session-item">
+                                <div class="session-item planner-session-item">
+                                    <div class="planner-session-time">${session.startTime} · ${session.duration} min</div>
                                     <h4>${session.topic}</h4>
                                     <div class="session-meta">
                                         <span>${subject ? subject.name : "Unknown"}</span>
-                                        <span>${session.startTime}</span>
-                                        <span>${session.duration} min</span>
                                     </div>
-                                    <div class="form-actions" style="margin-top: 12px; justify-content: flex-end;">
+                                    <div class="form-actions planner-session-actions">
                                         <div class="form-actions-right">
                                             <button class="secondary-btn small-btn" type="button" data-action="edit" data-id="${session.id}">Edit</button>
                                             <button class="danger-btn small-btn" type="button" data-action="delete" data-id="${session.id}">Delete</button>

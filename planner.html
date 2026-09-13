@@ -26,22 +26,45 @@
             </nav>
         </aside>
 
-        <main class="page-content">
-            <header class="page-header">
-                <div>
-                    <p class="eyebrow">Schedule</p>
-                    <h1>Study planner</h1>
-                </div>
-                <button id="newSessionButton" class="primary-btn" type="button">New session</button>
+        <main class="page-content planner-page">
+            <header class="topbar">
+                <div class="search-bar"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search assignments, notes, codes... (Cmd + K)"></div>
+                <div class="topbar-actions"><span class="focus-pill"><span></span> Focus sprint active</span><span class="notification-dot">3</span><span class="avatar">M</span></div>
             </header>
 
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>Weekly plan</h2>
-                    <span class="label">Upcoming</span>
+            <section class="planner-intro">
+                <div>
+                    <div class="planner-kicker"><span>Midterm season</span><span>Week 7 focus</span></div>
+                    <h1>Study Planner &amp; Weekly Rhythm</h1>
+                    <p>Harmonize deep problem sets, exam prep, and mindful recovery blocks.</p>
                 </div>
-                <div id="plannerWeek" class="week-grid"></div>
+                <div class="planner-controls">
+                    <div class="planner-view-tabs"><button class="active" type="button">Weekly</button><button type="button">Daily flow</button><button type="button">Month</button></div>
+                    <div class="planner-date-control"><button type="button" aria-label="Previous week">‹</button><span>Sep 9 - 15, 2026</span><button type="button" aria-label="Next week">›</button></div>
+                    <div class="planner-actions"><button class="secondary-btn" type="button">Today</button><button id="newSessionButton" class="primary-btn" type="button">⊕ Add Block</button></div>
+                </div>
             </section>
+
+            <section class="planner-tip"><span class="planner-tip-icon">▣</span><div><strong>PAHUWAY TIP · Gentle Pacing</strong><p><em>Dimagganat tanan.</em> Take it one 25-minute Pomodoro at a time. Maya, you're doing just fine.</p></div><span class="planner-tip-tag">Sem 1 · Week 7</span></section>
+
+            <div class="planner-layout">
+                <div class="planner-main">
+                    <section class="planner-stats" aria-label="Weekly planner summary">
+                        <article class="planner-stat"><div><span>Weekly study target</span><strong>17.5 <small>/ 25.0 hrs</small></strong></div><b class="stat-icon blue">◷</b><div class="stat-progress"><i style="width: 70%"></i></div><small>70% completed <em>7.5 hrs remaining</em></small></article>
+                        <article class="planner-stat"><div><span>Rhythm consistency</span><strong class="coral-text">5 Days <small>Active streak</small></strong></div><b class="stat-icon coral">♨</b><div class="streak-dots"><i>M</i><i>T</i><i>W</i><i>T</i><i>F</i><i class="muted">S</i><i class="muted">S</i><small>On track</small></div></article>
+                        <article class="planner-stat planner-stat-focus"><div><span>Instant sprint</span><strong>One-Touch Focus</strong><small>Start a 25-minute Pomodoro without setup fatigue.</small></div><b class="stat-icon blue">ϟ</b><button class="primary-btn" type="button">▷ Quick 25m Focus Sprint</button></article>
+                    </section>
+
+                    <section class="planner-days" aria-label="Week at a glance"><div class="planner-day"><span>Mon</span><strong>14</strong><small>•</small></div><div class="planner-day active"><span>Tue <b>Today</b></span><strong>15</strong><small>•</small></div><div class="planner-day"><span>Wed</span><strong>16</strong><small>•</small></div><div class="planner-day"><span>Thu</span><strong>17</strong><small>•</small></div><div class="planner-day"><span>Fri</span><strong>18</strong><small>•</small></div><div class="planner-day"><span>Sat</span><strong>19</strong><small>•</small></div><div class="planner-day"><span>Sun</span><strong>20</strong><small>•</small></div></section>
+
+                    <section class="planner-flow panel"><div class="panel-header"><div><h2>Today's Focus Flow <small>4 Blocks · 4.5 hrs planned</small></h2></div><a href="subjects.html">☷ Filter Subjects</a></div><div id="plannerWeek" class="planner-week-grid"></div></section>
+                </div>
+
+                <aside class="planner-rail">
+                    <section class="focus-session panel"><div class="live-label">● Live focus session</div><span class="focus-subject">MATH 101</span><h2>Multivariable Integration...</h2><p>◌ Cycle 2 of 4 · Deep Focus</p><div class="focus-timer"><strong>24:07</strong><span>REMAINING</span></div><div class="focus-timer-actions"><button class="primary-btn" type="button">Ⅱ Pause</button><button class="secondary-btn" type="button">↻ Reset</button></div><button class="mint-btn" type="button">☕ Take 5m Pahuway / Break</button><div class="rain-control">♬ Rain on Library Window <span>◉</span><i></i></div></section>
+                    <section class="breakdown-card panel"><div class="panel-header"><h2>Today's Focus Breakdown</h2><span>Total: 2h 15m</span></div><div><p><i class="blue-dot"></i> CS 312 Systems <b>1.5 hrs (90m)</b></p><i class="breakdown-bar blue-bar"></i><p><i class="coral-dot"></i> MATH 101 Calc <b>45 mins</b></p><i class="breakdown-bar coral-bar"></i></div><small>Target today: 4.5 hrs · <strong>50% of daily quota</strong></small></section>
+                </aside>
+            </div>
         </main>
     </div>
 
