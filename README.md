@@ -26,50 +26,74 @@ Wa Ko Kabalo aims to provide a simple and centralized dashboard where students c
 
 "Unsa akong buhaton karon?"
 
-✨ Features
-📊 Dashboard
+# Features
 
-# The dashboard provides an overview of the student's academic workload.
+# Dashboard
 
-Total active tasks
-Tasks due today
-Overdue tasks
-Completed tasks
-Overall progress
-Upcoming deadlines
-Priority tasks
-📝 Task Management
+The dashboard provides an overview of the student's academic workload:
 
-# Students can manage their academic tasks through CRUD operations.
+- Active tasks, due-today tasks, overdue tasks, and completed tasks
+- Overall completion rate and priority task views
+- Upcoming deadlines and focus-session preview
 
-Create new tasks
-View existing tasks
-Edit task information
-Delete tasks
-Update task status
-Track task completion progress
-Assign tasks to subjects
-Set task priorities and deadlines
-📚 Subject Management
+# Task Management
 
-# Students can organize their academic subjects.
+Tasks support CRUD operations and academic planning details:
 
-Add subjects
-View subjects
-Edit subject information
-Delete subjects
-Assign tasks to subjects
-View subject-related progress
-📅 Study Planner
+- Create, view, edit, and delete tasks
+- Update task status and completion progress
+- Assign tasks to subjects
+- Set task priorities and deadlines
 
-# Students can organize their study schedule through a weekly planner.
+# Subject Management
 
-Create study sessions
-View scheduled sessions
-Edit study sessions
-Delete study sessions
-Assign sessions to subjects
-Set study duration and topics
-🖥️ Pages
+Students can organize their academic subjects:
 
-The initial frontend prototype will contain four main
+- Add, view, edit, and delete subjects
+- Assign tasks to subjects
+- View subject workload and progress
+
+# Study Planner
+
+The Planner tab provides an interactive weekly schedule:
+
+- Create, view, edit, and delete study sessions
+- Assign sessions to subjects and set duration and topic
+- Click any date to view that day's tasks and study sessions
+- See colored date dots for scheduled items and task priority
+- Mark tasks or sessions complete with a check mark and strike-through state
+- Move between weeks with the previous and next controls
+- Switch between Weekly, Daily Flow, and Month planner tabs
+
+Completion and planner data are stored in the browser's local storage.
+
+# Pages
+
+The frontend prototype contains four main pages:
+
+- `index.html` - Dashboard
+- `tasks.html` - Task management
+- `subjects.html` - Subject management
+- `planner.html` - Weekly study planner
+
+# Project Structure
+
+```text
+css/style.css       Shared layout and component styles
+js/data.js          Local storage data and seed data
+js/dashboard.js     Dashboard rendering and statistics
+js/tasks.js         Task CRUD and filtering
+js/subjects.js      Subject CRUD and summaries
+js/planner.js       Planner rendering and session interactions
+assets/logo.svg     Wa Ko Kabalo logo
+```
+
+# Running Locally
+
+No build step or dependency installation is required. Open `index.html` in a browser, or serve the folder with any static web server.
+
+Example with VS Code Live Server:
+
+1. Open the project folder in VS Code.
+2. Start Live Server on `index.html`.
+3. Use the sidebar to navigate between Dashboard, Tasks, Subjects, and Planner.
